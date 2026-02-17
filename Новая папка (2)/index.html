@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KazSolveProblem</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+</head>
+
+<body>
+
+<header>
+
+<nav class="nav">
+    <div class="logo_block">
+        <img src="img/KSP logo2.jpeg" class="logo_img">
+    </div>
+
+    <div class="nav_links">
+        <a href="#mission">О проекте</a>
+        <a href="#contact">Сообщить о проблеме</a>
+    </div>
+</nav>
+
+<div class="hero">
+    <div class="hero_bg">
+        <h1>KazSolveProblem (KSP)</h1>
+        <p>Платформа для оперативного решения инфраструктурных проблем города.</p>
+    </div>
+</div>
+
+</header>
+
+<main>
+
+<section id="mission" class="section bg-white">
+    <h2>Миссия</h2>
+    <p>Наша команда полностью ориентируется на потребности обычных жителей города и стремится 
+        сделать жизнь комфортнее и безопаснее.</p>
+</section>
+
+<section class="section bg-gray">
+    <h2>Как это работает</h2>
+    <p> Любой житель может обратиться в нашу компанию и сообщить о возникшей проблеме: например, деформации дорожного покрытия, 
+        повреждённых бордюрах, ямах, разбитых тротуарах, сломанных ограждениях или других элементах городской среды.
+        Мы принимаем обращения напрямую, обеспечивая прозрачный и оперативный процесс — от фиксации проблемы до её устранения.</p>
+</section>
+
+<section class="section bg-white">
+    <h2>Технологии</h2>
+    <p>Для повышения эффективности работы мы активно используем современные технологии, в частности 
+        искусственный интеллект. С его помощью автоматически анализируются 
+        обращения жителей, оценивается степень повреждений, 
+        приоритизируются наиболее критические участки и прогнозируются возможные проблемы в будущем.</p>
+</section>
+
+<section id="contact" class="section bg-gray">
+    <h2>Сообщить о проблеме</h2>
+
+    <form class="contact_form" id="contactForm">
+        <input type="text" id="name" placeholder="Ваше имя" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <textarea id="message" placeholder="Опишите проблему..." required></textarea>
+        <button type="submit">Отправить обращение</button>
+        <div class="success_message" id="successMessage">
+            Сообщение успешно отправлено!
+        </div>
+    </form>
+</section>
+
+</main>
+
+<footer class="footer">
+© 2026 KazSolveProblem (KSP)
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+
+(function(){
+    emailjs.init("j840fqov77Z4er29s"); 
+})();
+
+document.getElementById("contactForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    emailjs.send("service_5uazh5h", "template_fxsep7n", {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        message: document.getElementById("message").value
+    })
+    .then(function() {
+        document.getElementById("successMessage").style.display = "block";
+        document.getElementById("contactForm").reset();
+    });
+});
+
+const sections = document.querySelectorAll(".section");
+
+window.addEventListener("scroll", () => {
+    sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        if (sectionTop < window.innerHeight - 100) {
+            section.classList.add("visible");
+        }
+    });
+});
+
+</script>
+
+</body>
+</html>
